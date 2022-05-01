@@ -58,18 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-//    private static final String[] AUTH_WHITELIST = {
-//            // -- Swagger UI v2
-//            "/v2/api-docs",
-//            "/swagger-resources",
-//            "/swagger-resources/**",
-//            "/configuration/ui",
-//            "/configuration/security",
-//            "/swagger-ui.html",
-//            "/webjars/**",
-//            "/v3/api-docs/**",
-//            "/swagger-ui/**"
-//    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -82,11 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/v1/user").permitAll()
-//                .antMatchers(HttpMethod.POST,"/api/v1/application").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/v1/doctor").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/v1/appointment").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/v1/appointment/request").permitAll()
-//                .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
